@@ -171,9 +171,8 @@ C# · ASP.NET Core Web API · SQL Server / T-SQL · ADO.NET · PowerShell · Jav
 
 ## 📬 Contact
 Open to freelance work: custom ASP.NET Core backends built with this engine.
+Rafeiq Refay
 
-- LinkedIn: [Baraa Mardini](https://linkedin.com/in/baraa-mardini-a42698356)
-- Email: bara.mardini488@gmail.com
 =======
 # Code_Generation
 >>>>>>> 67a4af67ab1cd5b0925af0b12f85c3cd9796c313
