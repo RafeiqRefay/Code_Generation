@@ -1,0 +1,576 @@
+<!-- generator.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Code Generator - Builder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="builder-style.css" rel="stylesheet" />
+  </head>
+  <body class="body-dark">
+    <header class="header-main">
+      <div class="header-logo">Code<span>Generator</span></div>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="generator.html" class="nav-link nav-link-primary">Builder</a>
+      </nav>
+    </header>
+
+    <main class="main-wrapper">
+      <section class="wizard-layout">
+        <!-- Sidebar -->
+        <aside class="wizard-sidebar glass-card" id="wizardSidebar">
+          <h2 class="sidebar-title">Builder Steps</h2>
+          <ol class="sidebar-steps">
+            <li class="sidebar-step sidebar-step-active" id="stepNavOperations">
+              <span class="step-index">1</span>
+              <span class="step-label">Operations</span>
+            </li>
+            <li class="sidebar-step" id="stepNavTableSettings">
+              <span class="step-index">2</span>
+              <span class="step-label">Table Settings</span>
+            </li>
+            <li class="sidebar-step" id="stepNavDtoBuilder">
+              <span class="step-index">3</span>
+              <span class="step-label">DTO Builder</span>
+            </li>
+            <li class="sidebar-step" id="stepNavViewDtoBuilder">
+              <span class="step-index">4</span>
+              <span class="step-label">ViewDTO Builder</span>
+            </li>
+            <li class="sidebar-step" id="stepNavReviewGenerate">
+              <span class="step-index">5</span>
+              <span class="step-label">Review &amp; Generate</span>
+            </li>
+          </ol>
+        </aside>
+
+        <!-- Main Content -->
+        <section class="wizard-content" id="wizardContent">
+          <!-- Step 1: Operations -->
+          <div
+            class="wizard-step glass-card wizard-step-active"
+            id="stepOperations"
+          >
+            <header class="wizard-step-header">
+              <h2 class="wizard-step-title gradient-text">
+                Step 1: Operations Selection
+              </h2>
+              <p class="wizard-step-subtitle">
+                Choose which operations should be generated for this table.
+              </p>
+            </header>
+
+            <div class="wizard-step-body">
+              <div class="operations-group">
+                <h3 class="group-title">GAUD Operations</h3>
+                <div class="operations-grid">
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      id="opGetAllUnique"
+                      class="checkbox-input"
+                    />
+                    <span class="checkbox-text">GetAll</span>
+                  </label>
+               
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      id="opGetOneByUnique"
+                      class="checkbox-input"
+                    />
+                    <span class="checkbox-text">GetOneBy</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      id="opAddNewUnique"
+                      class="checkbox-input"
+                    />
+                    <span class="checkbox-text">Add New</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      id="opUpdateByUnique"
+                      class="checkbox-input"
+                    />
+                    <span class="checkbox-text">Update By</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      id="opDeleteByUnique"
+                      class="checkbox-input"
+                    />
+                    <span class="checkbox-text">Delete By</span>
+                  </label>
+
+
+
+                    <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      id="opSearchUnique"
+                      class="checkbox-input"
+                    />
+                    <span class="checkbox-text">Search</span>
+                  </label>
+
+
+                </div>
+              </div>
+
+              <div class="operations-group">
+                <h3 class="group-title">Mode</h3>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input
+                      type="radio"
+                      name="operationsMode"
+                      id="opModeAllGaud"
+                      class="radio-input"
+                    />
+                    <span class="radio-text">GAUD Basic</span>
+                  </label>
+              
+                    <label class="radio-label">
+                    <input
+                      type="radio"
+                      name="operationsMode"
+                      id="opModeAllGaudFile"
+                      class="radio-input"
+                    />
+                    <span class="radio-text">GAUD Init</span>
+                  </label>
+    <label class="radio-label">
+                    <input
+                      type="radio"
+                      name="operationsMode"
+                      id="AllGAUDWhitOutCreateFile"
+                      class="radio-input"
+                    />
+                    <span class="radio-text">GAUD Extend</span>
+                  </label>
+
+
+                      <label class="radio-label">
+                    <input
+                      type="radio"
+                      name="operationsMode"
+                      id="opModeCustom"
+                      class="radio-input"
+                    />
+                    <span class="radio-text">Custom</span>
+                  </label>
+
+                  <label class="checkbox-label">
+  <input type="checkbox" id="opComplexQuery" class="checkbox-input">
+  <span class="checkbox-text">Complex Query</span>
+</label>
+
+<div id="complexQueryContainer" margin-top: 10px;">
+  <input type="text" id="ComplexQueryText" class="field-input" placeholder="Enter complex query name or condition">
+</div>
+                 <div class="project-config" id="projectConfigSection" >
+  <input type="text" id="ProjectPath" class="field-input" placeholder="Project Path">
+  <input type="text" id="DataBaseName" class="field-input" placeholder="Database Name">
+    <input type="text" id="PathEntity" class="field-input" placeholder="Path Entity">
+  <input type="text" id="PathPage" class="field-input" placeholder="Path Page">
+  <input type="text" id="PathStore" class="field-input" placeholder="Path Store">
+
+  
+</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Table Settings -->
+          <div class="wizard-step glass-card" id="stepTableSettings">
+            <header class="wizard-step-header">
+              <h2 class="wizard-step-title gradient-text">
+                Step 2: Table Settings
+              </h2>
+              <p class="wizard-step-subtitle">
+                Define the table name, schema, and behavior options.
+              </p>
+            </header>
+
+            <div class="wizard-step-body">
+              <div class="form-grid">
+                <div class="form-field">
+                  <label for="tableNameInputUnique" class="field-label"
+                    >Table Name</label
+                  >
+                  <input
+                    type="text"
+                    id="tableNameInputUnique"
+                    class="field-input"
+                    placeholder="e.g. Users"
+                  />
+                </div>
+          
+              </div>
+
+          
+            </div>
+          </div>
+          <!-- Step 2.5: Metadata Tools -->
+<div class="wizard-step glass-card" id="stepMetadataTools">
+  <header class="wizard-step-header">
+    <h2 class="wizard-step-title gradient-text">
+      Metadata Tools
+    </h2>
+    <p class="wizard-step-subtitle">
+      Generate table or query metadata and copy it instantly.
+    </p>
+  </header>
+
+  <div class="wizard-step-body metadata-grid">
+
+    <!-- Table Metadata -->
+    <div class="metadata-box">
+      <h3 class="group-title">Table Metadata (DTO Builder)</h3>
+      <textarea id="tableMetadataInput"
+        class="metadata-textarea"
+        placeholder="Paste SQL Table Metadata Script Here..."></textarea>
+      <div class="metadata-actions">
+        <button id="btnCopyTableMetadata" class="btn-secondary">
+          Copy Script
+        </button>
+      </div>
+    </div>
+
+    <!-- Query Metadata -->
+    <div class="metadata-box">
+      <h3 class="group-title">Query Metadata (ViewDTO Builder)</h3>
+      <textarea id="queryMetadataInput"
+        class="metadata-textarea"
+        placeholder="Paste SQL Query Metadata Script Here..."></textarea>
+      <div class="metadata-actions">
+        <button id="btnCopyQueryMetadata" class="btn-secondary">
+          Copy Script
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+          <!-- Step 3: DTO Builder -->
+          <div class="wizard-step glass-card" id="stepDtoBuilder">
+            <header class="wizard-step-header">
+              <h2 class="wizard-step-title gradient-text">
+                Step 3: DTO Builder
+              </h2>
+              <p class="wizard-step-subtitle">
+                Configure DTO fields and how they are used in queries and
+                updates.
+              </p>
+            </header>
+
+
+            <div class="wizard-step-body">
+              <div class="table-header-row">
+                <h3 class="group-title">DTO Parameters</h3>
+                <button id="btnAddDtoRow" class="btn-secondary">Add Row</button>
+              </div>
+
+              <div class="metadata-import-box">
+  <textarea id="dtoAutoFillInput"
+    class="metadata-textarea"
+    placeholder="Paste generated metadata result here..."></textarea>
+  <button id="btnFillDtoTable" class="btn-primary">
+    Auto Fill DTO Table
+  </button>
+</div>
+              <div class="table-wrapper">
+                <table class="config-table" id="dtoTableUnique">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Data Type</th>
+                      <th>Primary Key</th>
+                      <th>Foreign Key</th>
+                      <th>Use In Where</th>
+                      <th>Used In Get</th>
+                      <th>Use In Update</th>
+                       <th>Name Table</th>
+                       <th>ReferencedColumn</th>
+                       <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dtoTableBodyUnique">
+                    <tr id="dtoRow1">
+                      <td>
+                        <input
+                          type="text"
+                          id="dtoNameInput1"
+                          class="table-input"
+                          placeholder="ColumnName"
+                        />
+                      </td>
+                      <td>
+                        <select id="dtoDataTypeSelect1" class="table-select">
+                          <option value="">Select type</option>
+                          <option value="int">int</option>
+                          <option value="long">long</option>
+                          <option value="string">string</option>
+                          <option value="DateTime">DateTime</option>
+                          <option value="bool">bool</option>
+                           <option value="decimal">decimal</option>
+                        </select>
+                      </td>
+                      <td class="table-checkbox-cell">
+                        <input
+                          type="checkbox"
+                          id="dtoPrimaryKeyCheckbox1"
+                          class="table-checkbox"
+                        />
+                      </td>
+                      <td class="table-checkbox-cell">
+                        <input
+                          type="checkbox"
+                          id="dtoForeignKeyCheckbox1"
+                          class="table-checkbox"
+                        />
+                      </td>
+                      <td class="table-checkbox-cell">
+                        <input
+                          type="checkbox"
+                          id="dtoUseInWhereCheckbox1"
+                          class="table-checkbox"
+                        />
+                      </td>
+                   <td>
+                        <select id="dtoTypeUsedInWhere1" class="table-select">
+                          <option value="">Select type</option>
+                          <option value="0">None</option>
+                          <option value="1">Delete</option>
+                          <option value="2">Update</option>
+                          <option value="3">Both</option>
+                         
+                        </select>
+                      </td>
+                      <td class="table-checkbox-cell">
+                        <input
+                          type="checkbox"
+                          id="dtoUseInUpdateCheckbox1"
+                          class="table-checkbox"
+                        />
+                      </td>
+                        <td>
+                        <input
+                          type="text"
+                          id="dtoNameTable1"
+                          class="table-input"
+                          placeholder="ColumnName"
+                        />
+                      </td>
+                         <td>
+                        <input
+                          type="text"
+                          id="dtoReferencedColumnInput1"
+                          class="table-input"
+                          placeholder="ReferencedColumn"
+                        />
+                      </td>
+                      <td class="table-action-cell">
+  <button 
+    type="button"
+    id="dtoDeleteRowBtn1"
+    class="btn-row-delete"
+    onclick="this.closest('tr').remove()">
+    ✕
+  </button>
+</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: ViewDTO Builder -->
+          <div class="wizard-step glass-card" id="stepViewDtoBuilder">
+            <header class="wizard-step-header">
+              <h2 class="wizard-step-title gradient-text">
+                Step 4: ViewDTO Builder
+              </h2>
+              <p class="wizard-step-subtitle">
+                Configure ViewDTO fields, aliases, and join information.
+              </p>
+            </header>
+
+            <div class="wizard-step-body">
+              <div class="table-header-row">
+                <h3 class="group-title">ViewDTO Parameters</h3>
+                <button id="btnAddViewDtoRow" class="btn-secondary">
+                  Add Row
+                </button>
+              </div>
+              <div class="metadata-import-box">
+  <textarea id="viewDtoAutoFillInput"
+    class="metadata-textarea"
+    placeholder="Paste generated query metadata result here..."></textarea>
+  <button id="btnFillViewDtoTable" class="btn-primary">
+    Auto Fill ViewDTO Table
+  </button>
+</div>
+
+              <div class="table-wrapper">
+                <table class="config-table" id="viewDtoTableUnique">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Data Type</th>
+                      <th>Primary Key</th>
+                 
+                      <th>Use In Where</th>
+                      <th>Used In Get</th>
+                 
+                         <th>Action</th>
+
+                      
+                    </tr>
+                  </thead>
+                  <tbody id="viewDtoTableBodyUnique">
+                    <tr id="viewDtoRow1">
+                      <td>
+                        <input
+                          type="text"
+                          id="viewDtoNameInput1"
+                          class="table-input"
+                          placeholder="ColumnName"
+                        />
+                      </td>
+                      <td>
+                        <select
+                          id="viewDtoDataTypeSelect1"
+                          class="table-select"
+                        >
+                          <option value="">Select type</option>
+                          <option value="int">int</option>
+                          <option value="string">string</option>
+                          <option value="long">long</option>
+                          <option value="DateTime">DateTime</option>
+                          <option value="bool">bool</option>
+                           <option value="decimal">decimal</option>
+                           
+                        </select>
+                      </td>
+                      <td class="table-checkbox-cell">
+                        <input
+                          type="checkbox"
+                          id="viewDtoPrimaryKeyCheckbox1"
+                          class="table-checkbox"
+                        />
+                      </td>
+                 
+                     
+                 
+                      <td class="table-checkbox-cell">
+                        <input
+                          type="checkbox"
+                          id="viewDtoUseInWhereCheckbox1"
+                          class="table-checkbox"
+                        />
+                      </td>
+                       <td>
+                        <select
+                          id="viewDtoUsedInWhere"
+                          class="table-select"
+                        >
+                          <option value="">Select type</option>
+                          <option value="0">None</option>
+                          <option value="1">GetAll</option>
+                          <option value="2">GetOne</option>
+                          <option value="3">Both</option>
+                          
+                        </select>
+                      </td>
+                    
+                 
+                      <td class="table-action-cell">
+  <button 
+    type="button"
+    id="viewDtoDeleteRowBtn1"
+    class="btn-row-delete"
+    onclick="this.closest('tr').remove()">
+    ✕
+  </button>
+</td>
+
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5: Review & Generate -->
+          <div class="wizard-step glass-card" id="stepReviewGenerate">
+            <header class="wizard-step-header">
+              <h2 class="wizard-step-title gradient-text">
+                Step 5: Review &amp; Generate
+              </h2>
+              <p class="wizard-step-subtitle">
+                Review your configuration before generating the final code.
+              </p>
+            </header>
+
+            <div class="wizard-step-body review-grid">
+              <div class="review-panel glass-card-soft" id="reviewSummaryPanel">
+                <h3 class="group-title">Summary</h3>
+                <ul class="summary-list">
+                  <li id="summaryTableName">
+                    <span class="summary-label">Table Name:</span>
+                    <span class="summary-value">—</span>
+                  </li>
+                  <li id="summaryDtoColumnsCount">
+                    <span class="summary-label">DTO Columns:</span>
+                    <span class="summary-value">0</span>
+                  </li>
+                  <li id="summaryViewDtoColumnsCount">
+                    <span class="summary-label">ViewDTO Columns:</span>
+                    <span class="summary-value">0</span>
+                  </li>
+                  <li id="summarySelectedOperations">
+                    <span class="summary-label">Selected Operations:</span>
+                    <span class="summary-value">None</span>
+                  </li>
+               
+                </ul>
+              </div>
+
+              <div class="review-panel glass-card-soft" id="reviewNotesPanel">
+                <h3 class="group-title">Notes</h3>
+                <p class="review-text">
+                  When you are satisfied with the configuration, click the
+                  button below to generate your code. All settings from previous
+                  steps will be used to build the Data Access Layer, Services,
+                  DTOs, ViewDTOs, and optional stored procedures.
+                </p>
+                <button id="btnGenerateCode" class="btn-primary btn-large">
+                  Generate Code
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer-main">
+      <p class="footer-text">
+        &copy; <span id="footerYearBuilder">2026</span> Code Generator. All
+        rights reserved.
+      </p>
+    </footer>
+     <script src="code-generator.js"></script>
+  </body>
+  </body>
+</html>
+

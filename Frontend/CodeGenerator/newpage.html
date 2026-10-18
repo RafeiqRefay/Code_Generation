@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Advanced Code Generator Viewer</title>
+
+    <!-- Highlight.js Core -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- Languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+
+    <style>
+      /* ===== VS Code Dark+ Enhanced ===== */
+
+      .hljs {
+        background: #1e1e1e !important;
+        color: #d4d4d4 !important;
+      }
+
+      /* ===== C# Colors ===== */
+
+      .hljs-keyword {
+        color: #569cd6 !important;
+        font-weight: 600;
+      }
+
+      .hljs-type,
+      .hljs-built_in {
+        color: #4ec9b0 !important;
+      }
+
+      .hljs-title.class_ {
+        color: #4ec9b0 !important;
+      }
+
+      .hljs-title.function_ {
+        color: #dcdcaa !important;
+      }
+
+      .hljs-string {
+        color: #ce9178 !important;
+      }
+
+      .hljs-number {
+        color: #b5cea8 !important;
+      }
+
+      .hljs-comment {
+        color: #6a9955 !important;
+        font-style: italic;
+      }
+
+      .hljs-meta {
+        color: #c586c0 !important;
+      }
+
+      .hljs-variable,
+      .hljs-params {
+        color: #9cdcfe !important;
+      }
+
+      /* ===== SQL Stronger Colors ===== */
+
+      .language-sql .hljs-keyword {
+        color: #ff79c6 !important;
+        font-weight: bold;
+      }
+
+      .language-sql .hljs-title {
+        color: #50fa7b !important;
+      }
+
+      .language-sql .hljs-string {
+        color: #f1fa8c !important;
+      }
+
+      .language-sql .hljs-number {
+        color: #bd93f9 !important;
+      }
+
+      .language-sql .hljs-comment {
+        color: #8be9fd !important;
+        font-style: italic;
+      }
+
+      .language-sql .hljs-built_in {
+        color: #ffb86c !important;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: #0f172a;
+        font-family: "Segoe UI", sans-serif;
+        color: #e2e8f0;
+      }
+
+      .banner {
+        background: linear-gradient(90deg, #38bdf8, #818cf8);
+        padding: 20px;
+        text-align: center;
+        color: #0f172a;
+        font-size: 1.6rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .subtitle {
+        text-align: center;
+        margin-top: 5px;
+        color: #94a3b8;
+        font-size: 0.95rem;
+      }
+
+      .container {
+        padding: 25px;
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      h2 {
+        margin-top: 40px;
+        font-size: 1.3rem;
+        color: #38bdf8;
+        border-bottom: 1px solid #1e293b;
+        padding-bottom: 6px;
+      }
+
+      .section {
+        margin-bottom: 30px;
+        background: #1e293b;
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #334155;
+      }
+
+      .code-box {
+        position: relative;
+        margin-top: 10px;
+      }
+
+      pre {
+        background: #1e1e1e !important;
+        border: 1px solid #2d2d2d;
+        max-height: 350px;
+        overflow: auto;
+        border-radius: 10px;
+        font-size: 1.05rem;
+        padding: 18px !important;
+        direction: ltr;
+        text-align: left;
+      }
+
+      .copy-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #334155;
+        border: 1px solid #475569;
+        color: #e2e8f0;
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        transition: 0.2s;
+      }
+
+      .copy-btn:hover {
+        background: #38bdf8;
+        color: #0f172a;
+      }
+
+      .empty-msg {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 1.1rem;
+        color: #94a3b8;
+      }
+
+      .footer {
+        margin-top: 50px;
+        text-align: center;
+        color: #64748b;
+        font-size: 0.85rem;
+        padding-bottom: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="banner">Advanced Code Generator Output Viewer</div>
+    <div class="subtitle">Enhanced VS Code Style Highlighting</div>
+
+    <div class="container">
+      <div id="content"></div>
+      <div id="emptyMessage" class="empty-msg">
+        Waiting for data via postMessage…
+      </div>
+    </div>
+
+    <div class="footer">Powered by your custom Code Generator</div>
+
+    <script>
+      const SECTION_GROUPS = {
+        "SQL Statements": [
+          "sqlGetAll",
+          "sqlGetAllBy",
+          "sqlGetOneBy",
+          "sqlAdd",
+          "sqlUpdate",
+          "sqlDelete",
+          "sqlSearch",
+        ],
+        DTO: ["dto", "dtoView", "updateDTO","search"],
+        "Data Methods": [
+          "getAllData",
+          "getAllByData",
+          "getOneByData",
+          "addData",
+          "updateData",
+          "deleteData",
+          "searchData",
+        ],
+
+        "FrontEnd":[
+         "generateEntity"
+
+        ],
+        "Service Methods": [
+          "deleteService",
+          "updateService",
+          "addService",
+          "getAllByService",
+          "getAllService",
+          "getOneService",
+          "searchService",
+        ],
+        "Controller Methods": [
+          "getAllController",
+          "getAllByController",
+          "getOneByController",
+          "addController",
+          "updateController",
+          "deleteController",
+          "searchController",
+        ],
+        "Generated Classes": [
+          "generateControllerClass",
+          "generateServiceClass",
+          "generateDataClass",
+
+        ],
+    
+        "Generated ClassesWithFile": [
+          "createFiLe",
+          "createApiResult",
+          "createEnErrorType",
+          "createApiResponseHelper",
+          "createConnectionStringClass",
+          "executeGenerateDTOView",
+          "executeGenerateDTO",
+          "executeGenerateUpdateDTO",
+          "executeGenerateData",
+          "executeGenerateSearch",
+
+          "executeGenerateService",
+          "executeGenerateController",
+          "cleanCsprojScript",
+          "generateCreateSqlUpdate",
+          "generateCreateSqlAdd",
+          "generateCreateSqlDelete",
+          "generateCreateSqlGetAll",
+          "generateCreateSqlGetOne",
+          "generateCreateSqlSearch"
+          
+        ],
+      };
+
+      function createSection(title, key, value) {
+        const section = document.createElement("div");
+        section.className = "section";
+
+        const h2 = document.createElement("h2");
+        h2.textContent = title;
+        section.appendChild(h2);
+
+        const box = document.createElement("div");
+        box.className = "code-box";
+
+        const btn = document.createElement("button");
+        btn.className = "copy-btn";
+        btn.textContent = "Copy";
+        btn.onclick = () => {
+          navigator.clipboard.writeText(value);
+          btn.textContent = "Copied!";
+          setTimeout(() => (btn.textContent = "Copy"), 1200);
+        };
+
+        const pre = document.createElement("pre");
+        const code = document.createElement("code");
+
+        if (title.includes("SQL")) {
+          code.className = "language-sql";
+        } else {
+          code.className = "language-csharp";
+        }
+
+        code.textContent = value;
+
+        pre.appendChild(code);
+        box.appendChild(btn);
+        box.appendChild(pre);
+        section.appendChild(box);
+
+        return section;
+      }
+
+      function render(apiResult) {
+        const container = document.getElementById("content");
+        container.innerHTML = "";
+        let count = 0;
+
+        for (const [groupName, keys] of Object.entries(SECTION_GROUPS)) {
+          keys.forEach((key) => {
+            const value = apiResult[key];
+            if (value) {
+              container.appendChild(
+                createSection(groupName + " → " + key, key, value),
+              );
+              count++;
+            }
+          });
+        }
+
+        document.getElementById("emptyMessage").style.display =
+          count === 0 ? "block" : "none";
+
+        document.querySelectorAll("pre code").forEach((block) => {
+          hljs.highlightElement(block);
+        });
+      }
+
+      window.addEventListener("message", (event) => {
+        const data = event.data?.apiResult || event.data;
+        if (typeof data === "object") {
+          render(data);
+        }
+      });
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const storedData = JSON.parse(sessionStorage.getItem("apiResult"));
+        if (storedData) render(storedData);
+      });
+
+      function render(apiResult) {
+        const container = document.getElementById("content");
+        container.innerHTML = "";
+        let count = 0;
+        let allCodeCombined = ""; // هذا المتغير لتجميع كل الأكواد
+
+        for (const [groupName, keys] of Object.entries(SECTION_GROUPS)) {
+          keys.forEach((key) => {
+            const value = apiResult[key];
+            if (value) {
+              container.appendChild(
+                createSection(groupName + " → " + key, key, value),
+              );
+
+              // ❌ لا تجمع DTO داخل All Generated Code
+              if (!["dto", "dtoView", "updateDTO"].includes(key)) {
+                allCodeCombined += "\n\n// ===== " + key + " =====\n\n" + value;
+              }
+
+              count++;
+            }
+          });
+        }
+        // 🔥 إضافة قسم جديد يجمع كل الأكواد في مكان واحد
+        if (allCodeCombined.trim() !== "") {
+          container.appendChild(
+            createSection("All Generated Code", "allCode", allCodeCombined),
+          );
+        }
+
+        document.getElementById("emptyMessage").style.display =
+          count === 0 ? "block" : "none";
+
+        document.querySelectorAll("pre code").forEach((block) => {
+          hljs.highlightElement(block);
+        });
+      }
+    </script>
+  </body>
+</html>

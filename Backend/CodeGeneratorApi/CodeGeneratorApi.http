@@ -1,0 +1,6 @@
+@CodeGeneratorApi_HostAddress = http://localhost:5276
+
+GET {{CodeGeneratorApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

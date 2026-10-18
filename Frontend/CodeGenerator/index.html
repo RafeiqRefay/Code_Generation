@@ -1,0 +1,109 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Code Generator - Landing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="builder-style.css" rel="stylesheet" />
+  </head>
+  <body class="body-dark">
+    <header class="header-main">
+      <div class="header-logo">Code<span>Generator</span></div>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="generator.html" class="nav-link nav-link-primary"
+          >Start Building</a
+        >
+      </nav>
+    </header>
+
+    <main class="main-wrapper">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-content">
+          <h1 class="hero-title gradient-text">Code Generator</h1>
+          <p class="hero-subtitle">Generate professional code with ease</p>
+          <a
+            id="startBuildingButton"
+            href="generator.html"
+            class="btn-primary btn-large"
+          >
+            Start Building
+          </a>
+        </div>
+        <div class="hero-visual glass-card">
+          <h2 class="hero-visual-title">Architecture Overview</h2>
+          <p class="hero-visual-text">
+            Define operations, configure tables, and shape DTOs and ViewDTOs in
+            a guided, modern builder.
+          </p>
+          <div class="hero-badges">
+            <span class="badge-pill">DAL</span>
+            <span class="badge-pill">Services</span>
+            <span class="badge-pill">DTO</span>
+            <span class="badge-pill">SQL</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Architecture Layers Section -->
+      <section class="section-architecture">
+        <h2 class="section-title gradient-text">Architecture Layers</h2>
+        <p class="section-subtitle">
+          Design your application stack with clear, modular layers ready for
+          generation.
+        </p>
+        <div class="architecture-grid">
+          <article
+            class="architecture-card glass-card"
+            id="cardDataAccessLayer"
+          >
+            <h3 class="architecture-title">Data Access Layer</h3>
+            <p class="architecture-text">
+              Configure repository patterns, identity usage, and async
+              operations for robust data access.
+            </p>
+          </article>
+
+          <article class="architecture-card glass-card" id="cardServicesLayer">
+            <h3 class="architecture-title">Services Layer</h3>
+            <p class="architecture-text">
+              Generate service methods aligned with your selected operations and
+              business rules.
+            </p>
+          </article>
+
+          <article class="architecture-card glass-card" id="cardModelsLayer">
+            <h3 class="architecture-title">Models (DTO / ViewDTO)</h3>
+            <p class="architecture-text">
+              Shape DTOs and ViewDTOs with fine-grained control over fields,
+              joins, and naming.
+            </p>
+          </article>
+
+          <article
+            class="architecture-card glass-card"
+            id="cardStoredProceduresLayer"
+          >
+            <h3 class="architecture-title">
+              Stored Procedures &amp; SQL Queries
+            </h3>
+            <p class="architecture-text">
+              Decide when to use stored procedures and generate tailored SQL for
+              your schema.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer-main">
+      <p class="footer-text">
+        &copy; <span id="footerYear">2026</span> Code Generator. All rights
+        reserved.
+      </p>
+    </footer>
+    <script src="code-generator.js"></script>
+  </body>
+</html>
